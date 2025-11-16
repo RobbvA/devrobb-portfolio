@@ -1,13 +1,23 @@
+/* src/app/globals.css */
+
+/* Basis-variabelen */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000; /* volledig zwart */
+  --foreground: #ffffff; /* neutraal wit */
+  --nav-sidebar-width: 200px; /* matcht NAV_SIDEBAR_WIDTH */
+  --nav-bottom-height: 64px; /* matcht NAV_BOTTOM_HEIGHT */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark color-scheme voor consistente system UI */
+html {
+  color-scheme: dark;
+}
+
+/* Reset & basics */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
@@ -16,27 +26,40 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Body-styling (globaal) */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Roboto", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main: zorg voor ruimte voor nav (mobiel: bottom bar, desktop: sidebar) */
+main {
+  min-height: 100dvh;
+  padding-bottom: calc(var(--nav-bottom-height) + env(safe-area-inset-bottom));
+  background: var(--background); /* expliciet zwart per pagina */
+}
+
+/* Desktop (≥ 1024px): links ruimte voor sidebar, geen bottom padding */
+@media (min-width: 1024px) {
+  main {
+    padding-left: var(--nav-sidebar-width);
+    padding-bottom: 0;
+  }
+
+  /* src/app/globals.css */
+
+  /* Optional: consistent focus ring helper (kan je op containers toepassen) */
+  :where(.focus-ring) {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(181, 186, 255, 0.6);
   }
 }
