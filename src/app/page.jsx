@@ -83,7 +83,7 @@ export default function HomePage() {
                 lineHeight={1.2}
                 letterSpacing="0.025em"
                 color="#FFFCDD"
-                mb={2}
+                mb={4}
                 fontWeight="200"
                 className={playfair.className}
               >
@@ -96,7 +96,7 @@ export default function HomePage() {
                 color="rgba(181,186,255,0.55)"
                 textTransform="uppercase"
                 letterSpacing="0.18em"
-                mb={8}
+                mb={10}
               >
                 dev.robb · Web development
               </Text>
@@ -131,8 +131,8 @@ export default function HomePage() {
               mt={{ base: 2, md: 3 }}
             >
               <Text
-                fontSize={{ base: "sm", md: "sm" }}
-                color="rgba(255,255,255,0.4)"
+                fontSize={{ base: "xs", md: "sm" }}
+                color="rgba(255, 255, 255, 0.32)"
                 lineHeight={1.6}
               >
                 React · Next.js · Node.js · Express · Prisma · SQLite · REST

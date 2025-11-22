@@ -19,87 +19,83 @@ export default function Footer() {
   return (
     <Box
       as="footer"
+      role="contentinfo"
       bg="#0d0d0d"
       color="rgba(255,255,255,0.85)"
       borderTop="1px solid rgba(255,255,255,0.12)"
       mt={24}
       py={{ base: 8, md: 10 }}
     >
-      <Container maxW="6xl" px={{ base: 4, md: 6 }}>
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          position="relative"
+      <Container
+        maxW="6xl"
+        px={{ base: 4, md: 6 }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        gap={6}
+      >
+        <Text
+          fontSize="sm"
+          color="rgba(255,255,255,0.72)"
+          letterSpacing="0.6px"
+          textAlign="center"
         >
-          {/* Tekst */}
-          <Text
-            fontSize="sm"
-            color="#FFFCDD"
-            letterSpacing="0.6px"
-            textAlign="center"
+          © {year} — Robbert van Asselt · Fullstack Developer
+        </Text>
+
+        <HStack gap="80px" mt={6}>
+          <Link
+            as={NextLink}
+            href="https://instagram.com/dev.robb"
+            aria-label="Instagram"
+            title="Instagram"
+            display="inline-flex"
+            alignItems="center"
+            _hover={{ textDecoration: "none" }}
           >
-            © {year} — Robbert van Asselt · Fullstack Developer
-          </Text>
+            <Icon
+              as={FiInstagram}
+              boxSize="28px"
+              color="rgba(255,255,255,0.85)"
+              _hover={{ color: "#b5baff", transition: "0.2s ease" }}
+            />
+          </Link>
 
-          {/* Social icons met extra grote spacing */}
-          <HStack
-            gap="50px" // 🔹 meer ruimte tussen iconen (je kunt dit ook 100px maken)
-            mt={6}
-            position="relative"
+          <Link
+            as={NextLink}
+            href="https://github.com/RobbvA" // 🔹 hier aangepast
+            aria-label="GitHub"
+            title="GitHub"
+            display="inline-flex"
+            alignItems="center"
+            _hover={{ textDecoration: "none" }}
           >
-            <Link
-              as={NextLink}
-              href="https://instagram.com/dev.robb"
-              aria-label="Instagram"
-              title="Instagram"
-              display="inline-flex"
-              alignItems="center"
-              _hover={{ textDecoration: "none" }}
-            >
-              <Icon
-                as={FiInstagram}
-                boxSize="23px"
-                color="rgba(255,255,255,0.85)"
-                _hover={{ color: "#b5baff", transition: "0.2s ease" }}
-              />
-            </Link>
+            <Icon
+              as={FiGithub}
+              boxSize="28px"
+              color="rgba(255,255,255,0.85)"
+              _hover={{ color: "#b5baff", transition: "0.2s ease" }}
+            />
+          </Link>
 
-            <Link
-              as={NextLink}
-              href="https://github.com/dev-robb"
-              aria-label="GitHub"
-              title="GitHub"
-              display="inline-flex"
-              alignItems="center"
-              _hover={{ textDecoration: "none" }}
-            >
-              <Icon
-                as={FiGithub}
-                boxSize="23px"
-                color="rgba(255,255,255,0.85)"
-                _hover={{ color: "#b5baff", transition: "0.2s ease" }}
-              />
-            </Link>
-
-            <Link
-              as={NextLink}
-              href="https://www.linkedin.com/in/dev-robb"
-              aria-label="LinkedIn"
-              title="LinkedIn"
-              display="inline-flex"
-              alignItems="center"
-              _hover={{ textDecoration: "none" }}
-            >
-              <Icon
-                as={FiLinkedin}
-                boxSize="23px"
-                color="rgba(255,255,255,0.85)"
-                _hover={{ color: "#b5baff", transition: "0.2s ease" }}
-              />
-            </Link>
-          </HStack>
-        </Flex>
+          <Link
+            as={NextLink}
+            href="https://www.linkedin.com/in/dev-robb"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+            display="inline-flex"
+            alignItems="center"
+            _hover={{ textDecoration: "none" }}
+          >
+            <Icon
+              as={FiLinkedin}
+              boxSize="28px"
+              color="rgba(255,255,255,0.85)"
+              _hover={{ color: "#b5baff", transition: "0.2s ease" }}
+            />
+          </Link>
+        </HStack>
       </Container>
     </Box>
   );

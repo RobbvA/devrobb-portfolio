@@ -67,8 +67,10 @@ export default function Nav() {
             alt="dev.robb logo"
             width={180}
             height={80}
-            priority
-            style={{ height: "auto" }}
+            style={{
+              width: "180px",
+              height: "auto", 
+            }}
           />
         </Box>
 
