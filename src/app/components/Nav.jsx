@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   { label: "Home", href: "/", icon: FiHome },
   { label: "About", href: "/about", icon: FiUser },
   { label: "Projects", href: "/gallery", icon: FiImage }, // was: Gallery
-  { label: "Resources", href: "/posts", icon: FiInstagram }, // was: Posts
+  { label: "Resources", href: "/resources", icon: FiInstagram }, // now points to /resources
 ];
 
 const MotionBox = motion.create(Box);
@@ -69,7 +69,7 @@ export default function Nav() {
             height={80}
             style={{
               width: "180px",
-              height: "auto", 
+              height: "auto",
             }}
           />
         </Box>
