@@ -1,7 +1,6 @@
-// app/resources/page.jsx
+// src/app/resources/page.jsx
 "use client";
 
-import Link from "next/link";
 import {
   Box,
   Heading,
@@ -9,48 +8,57 @@ import {
   VStack,
   SimpleGrid,
   Badge,
-  Button,
 } from "@chakra-ui/react";
+import Link from "next/link";
+import { useState } from "react";
+
+function ResourceSection({
+  title,
+  description,
+  defaultOpen = false,
+  children,
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <Box w="full" borderTop="1px solid #111" pt={5}>
+      {/* Section header (dropdown trigger) */}
+      <Box
+        as="button"
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        w="100%"
+        display="flex"
+        alignItems="flex-start"
+        justifyContent="space-between"
+        textAlign="left"
+        mb={isOpen ? 4 : 1}
+      >
+        <VStack align="flex-start" spacing={1}>
+          <Heading
+            fontSize={{ base: "lg", md: "xl" }}
+            letterSpacing="-0.4px"
+            lineHeight="1.3"
+          >
+            {title}
+          </Heading>
+          {description && (
+            <Text fontSize="sm" color="gray.400" maxW="640px" lineHeight="1.6">
+              {description}
+            </Text>
+          )}
+        </VStack>
+        <Box fontSize="xl" color="gray.500" pl={4} pt={1} aria-hidden="true">
+          {isOpen ? "−" : "+"}
+        </Box>
+      </Box>
+
+      {isOpen && <Box>{children}</Box>}
+    </Box>
+  );
+}
 
 export default function ResourcesPage() {
-  const playbooks = [
-    {
-      title: "React App Playbook",
-      description:
-        "How I structure modern React applications: components, hooks, UI system, and development workflow.",
-      href: "/playbooks/react-app-playbook",
-      tag: "Core system",
-    },
-    {
-      title: "Full-Stack API Playbook",
-      description:
-        "Node.js + Express + Prisma setup, clean architecture, validation with Zod, and predictable responses.",
-      href: "/playbooks/full-stack-api-playbook",
-      tag: "Backend",
-    },
-    {
-      title: "Next.js Application Playbook",
-      description:
-        "My go-to structure for building full-stack apps with the App Router, server components, and modern data patterns.",
-      href: "/playbooks/nextjs-application-playbook",
-      tag: "Full stack",
-    },
-    {
-      title: "Database Schema & Design Guide",
-      description:
-        "How I design relational database schemas: entities, relationships, constraints, and indexing strategy.",
-      href: "/playbooks/database-schema-design-guide",
-      tag: "Architecture",
-    },
-    {
-      title: "Error Handling & API Response Patterns",
-      description:
-        "Consistent API response shapes, error handling middleware, HTTP status codes, and custom error patterns.",
-      href: "/playbooks/error-handling-api-response-patterns",
-      tag: "Reliability",
-    },
-  ];
-
   return (
     <Box
       as="main"
@@ -62,138 +70,363 @@ export default function ResourcesPage() {
       pb={{ base: 12, md: 20 }}
     >
       {/* Page Header */}
-      <VStack align="flex-start" spacing={3} mb={10}>
-        <Heading fontSize={{ base: "2xl", md: "3xl" }} letterSpacing="-0.5px">
+      <VStack align="flex-start" spacing={3} mb={10} maxW="720px">
+        <Heading
+          fontSize={{ base: "2xl", md: "3xl" }}
+          letterSpacing="-0.6px"
+          lineHeight="1.2"
+        >
           Resources
         </Heading>
-        <Text fontSize="sm" color="gray.400">
+        <Text fontSize="sm" color="gray.300" lineHeight="1.7">
           A collection of tools, learning materials, and development systems I
           use to build high-quality projects efficiently.
         </Text>
       </VStack>
 
-      <VStack align="flex-start" spacing={12}>
+      <VStack align="flex-start" spacing={10} maxW="960px">
         {/* 1. Project Playbooks */}
-        <VStack align="flex-start" spacing={4} w="full">
-          <Heading fontSize="xl" letterSpacing="-0.5px">
-            Project Playbooks
-          </Heading>
-          <Text fontSize="sm" color="gray.400" maxW="600px">
-            Living documents that describe how I plan, structure, and build
-            modern applications. These playbooks make my workflow transparent
-            and repeatable across projects.
-          </Text>
-
+        <ResourceSection
+          title="Project Playbooks"
+          description="The core systems I use to start projects quickly and keep my workflow consistent — from React frontends to full-stack APIs and database design."
+          defaultOpen={true}
+        >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
-            {playbooks.map((playbook) => (
-              <Box
-                key={playbook.title}
-                bg="#111"
-                border="1px solid #222"
-                borderRadius="lg"
-                p={4}
-                display="flex"
-                flexDirection="column"
-                justifyContent="space-between"
-                _hover={{
-                  borderColor: "#b5baff",
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 0 0 1px #1a1a1a",
-                }}
-                transition="all 0.18s ease-out"
-              >
-                <Box mb={3}>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    mb={1}
-                    gap={2}
-                  >
-                    <Heading size="sm">{playbook.title}</Heading>
-                    {playbook.tag && (
-                      <Badge
-                        colorScheme="purple"
-                        fontSize="0.6rem"
-                        borderRadius="full"
-                      >
-                        {playbook.tag}
-                      </Badge>
-                    )}
-                  </Box>
-                  <Text fontSize="xs" color="gray.400">
-                    {playbook.description}
-                  </Text>
-                </Box>
+            <Box
+              as={Link}
+              href="/playbooks/react-app-playbook"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={2} letterSpacing="-0.2px">
+                React App Playbook
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
+                My structure for React projects: components, hooks, UI system,
+                routing patterns, and state management.
+              </Text>
+            </Box>
 
-                <Box mt={2}>
-                  <Link href={playbook.href}>
-                    <Button
-                      size="xs"
-                      variant="outline"
-                      borderColor="#333"
-                      _hover={{
-                        bg: "#b5baff",
-                        color: "#000",
-                        borderColor: "#b5baff",
-                      }}
-                    >
-                      View playbook
-                    </Button>
-                  </Link>
-                </Box>
-              </Box>
-            ))}
+            <Box
+              as={Link}
+              href="/playbooks/full-stack-api-playbook"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={2} letterSpacing="-0.2px">
+                Full-Stack API Playbook
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
+                Node.js + Express + Prisma setup, error handling, validation
+                with Zod, and database workflow.
+              </Text>
+            </Box>
+
+            <Box
+              as={Link}
+              href="/playbooks/nextjs-application-playbook"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={2} letterSpacing="-0.2px">
+                Next.js Application Playbook
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
+                My go-to template for data-driven web apps using the App Router,
+                Server Components, and schema-first design.
+              </Text>
+            </Box>
+
+            <Box
+              as={Link}
+              href="/playbooks/database-schema-design-guide"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={2} letterSpacing="-0.2px">
+                Database Schema & Design Guide
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
+                Principles I follow to design scalable relational database
+                schemas before writing backend code.
+              </Text>
+            </Box>
+
+            <Box
+              as={Link}
+              href="/playbooks/error-handling-api-response-patterns"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={2} letterSpacing="-0.2px">
+                Error Handling & API Responses
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
+                How I keep API responses predictable, secure, and easy to work
+                with in frontends.
+              </Text>
+            </Box>
           </SimpleGrid>
-        </VStack>
+        </ResourceSection>
 
         {/* 2. Project Blueprints */}
-        <VStack align="flex-start" spacing={4} w="full">
-          <Heading fontSize="xl" letterSpacing="-0.5px">
-            Project Blueprints
-          </Heading>
-          <Text fontSize="sm" color="gray.400" maxW="600px">
-            Reusable patterns for real-world features. These help me move fast
-            when building new applications or experimenting with ideas.
-          </Text>
-
+        <ResourceSection
+          title="Project Blueprints"
+          description="Reusable implementation patterns for real-world features. Each blueprint focuses on one thing — with routes, API shape, and UI behaviour already thought through."
+        >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
-            {[
-              "Authentication Flow Blueprint",
-              "CRUD API Blueprint",
-              "UI Pattern: Lists / Cards / Modals",
-              "Filtering & Sorting Logic",
-              "Loading Skeleton Patterns",
-              "Form Validation with Zod + React Hook Form",
-            ].map((title) => (
-              <Box
-                key={title}
-                bg="#111"
-                border="1px solid #222"
-                borderRadius="lg"
-                p={4}
+            {/* Authentication Flow Blueprint */}
+            <Box
+              as={Link}
+              href="/blueprints/authentication-flow-blueprint"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={1} letterSpacing="-0.2px">
+                Authentication Flow Blueprint
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
+                A complete login / signup / logout flow with protected routes,
+                refresh tokens, and role-based access that I can plug into new
+                projects.
+              </Text>
+              <Badge
+                mt={1}
+                fontSize="0.7rem"
+                borderRadius="full"
+                px={2}
+                py={0.5}
+                bg="#191919"
               >
-                <Heading size="sm" mb={2}>
-                  {title}
-                </Heading>
-                <Badge colorScheme="purple" mt={2}>
-                  Coming soon
-                </Badge>
-              </Box>
-            ))}
+                Detailed
+              </Badge>
+            </Box>
+
+            {/* CRUD API Blueprint */}
+            <Box
+              as={Link}
+              href="/blueprints/crud-api-blueprint"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={1} letterSpacing="-0.2px">
+                CRUD API Blueprint
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
+                A standard pattern for list / detail / create / update / delete
+                endpoints with pagination and predictable responses.
+              </Text>
+              <Badge
+                mt={1}
+                fontSize="0.7rem"
+                borderRadius="full"
+                px={2}
+                py={0.5}
+                bg="#191919"
+              >
+                In progress
+              </Badge>
+            </Box>
+
+            {/* UI Pattern: Lists / Cards / Modals */}
+            <Box
+              as={Link}
+              href="/blueprints/ui-lists-cards-modals-blueprint"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={1} letterSpacing="-0.2px">
+                UI Pattern: Lists / Cards / Modals
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
+                A reusable layout for list overviews, detail modals and card
+                grids — perfect for dashboards and content-heavy pages.
+              </Text>
+              <Badge
+                mt={1}
+                fontSize="0.7rem"
+                borderRadius="full"
+                px={2}
+                py={0.5}
+                bg="#191919"
+              >
+                In progress
+              </Badge>
+            </Box>
+
+            {/* Filtering & Sorting Logic */}
+            <Box
+              as={Link}
+              href="/blueprints/filtering-and-sorting-logic-blueprint"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={1} letterSpacing="-0.2px">
+                Filtering &amp; Sorting Logic
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
+                A pattern for keeping filters, sort state and URL params in sync
+                when working with large datasets.
+              </Text>
+              <Badge
+                mt={1}
+                fontSize="0.7rem"
+                borderRadius="full"
+                px={2}
+                py={0.5}
+                bg="#191919"
+              >
+                In progress
+              </Badge>
+            </Box>
+
+            {/* Loading Skeleton Patterns */}
+            <Box
+              as={Link}
+              href="/blueprints/loading-skeleton-patterns-blueprint"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={1} letterSpacing="-0.2px">
+                Loading Skeleton Patterns
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
+                Reusable skeleton states for tables, cards and detail views so
+                the UI feels fast while data loads.
+              </Text>
+              <Badge
+                mt={1}
+                fontSize="0.7rem"
+                borderRadius="full"
+                px={2}
+                py={0.5}
+                bg="#191919"
+              >
+                In progress
+              </Badge>
+            </Box>
+
+            {/* Form Validation Blueprint */}
+            <Box
+              as={Link}
+              href="/blueprints/form-validation-blueprint"
+              bg="#0b0b0b"
+              border="1px solid #222"
+              borderRadius="lg"
+              p={4}
+              _hover={{
+                borderColor: "#444",
+                bg: "#101010",
+                transform: "translateY(-1px)",
+              }}
+              transition="all 0.15s ease-out"
+            >
+              <Heading size="sm" mb={1} letterSpacing="-0.2px">
+                Form Validation Blueprint
+              </Heading>
+              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
+                A schema-first form setup using Zod and React Hook Form with
+                predictable error messages and UX patterns.
+              </Text>
+              <Badge
+                mt={1}
+                fontSize="0.7rem"
+                borderRadius="full"
+                px={2}
+                py={0.5}
+                bg="#191919"
+              >
+                In progress
+              </Badge>
+            </Box>
           </SimpleGrid>
-        </VStack>
+        </ResourceSection>
 
         {/* 3. Best Learning Content (Instagram Reels) */}
-        <VStack align="flex-start" spacing={4} w="full">
-          <Heading fontSize="xl" letterSpacing="-0.5px">
-            Best Learning Content
-          </Heading>
-          <Text fontSize="sm" color="gray.400" maxW="600px">
-            A curated selection of my best-performing educational reels that
-            helped me learn, teach others, and grow my developer network.
-          </Text>
-
+        <ResourceSection
+          title="Best Learning Content"
+          description="A curated selection of my educational reels that helped me learn, teach others, and grow my developer network."
+        >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
             {[
               "HTTP Status Codes Explained",
@@ -205,28 +438,28 @@ export default function ResourcesPage() {
             ].map((title) => (
               <Box
                 key={title}
-                bg="#111"
+                bg="#0b0b0b"
                 border="1px solid #222"
                 borderRadius="lg"
                 p={4}
               >
-                <Heading size="sm" mb={2}>
+                <Heading size="sm" mb={2} letterSpacing="-0.2px">
                   {title}
                 </Heading>
-                <Text fontSize="xs" color="gray.400">
-                  One of my most helpful reels for teaching and learning.
+                <Text fontSize="sm" color="gray.400" lineHeight="1.6">
+                  One of my most helpful short-form explanations for teaching
+                  and learning.
                 </Text>
               </Box>
             ))}
           </SimpleGrid>
-        </VStack>
+        </ResourceSection>
 
         {/* 4. Tools */}
-        <VStack align="flex-start" spacing={4} w="full">
-          <Heading fontSize="xl" letterSpacing="-0.5px">
-            Tools I Use
-          </Heading>
-
+        <ResourceSection
+          title="Tools I Use"
+          description="The core tools that are almost always open when I'm building or debugging applications."
+        >
           <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4} w="full">
             {[
               "VS Code",
@@ -238,20 +471,22 @@ export default function ResourcesPage() {
             ].map((tool) => (
               <Box
                 key={tool}
-                bg="#111"
+                bg="#0b0b0b"
                 border="1px solid #222"
                 borderRadius="lg"
                 p={3}
               >
-                <Text fontSize="sm">{tool}</Text>
+                <Text fontSize="sm" lineHeight="1.5">
+                  {tool}
+                </Text>
               </Box>
             ))}
           </SimpleGrid>
 
-          <Text fontSize="xs" color="gray.500">
+          <Text fontSize="xs" color="gray.500" mt={3}>
             (More tools will be added as my stack grows.)
           </Text>
-        </VStack>
+        </ResourceSection>
       </VStack>
     </Box>
   );
