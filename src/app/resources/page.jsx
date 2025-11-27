@@ -10,10 +10,25 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
+import { Playfair_Display } from "next/font/google";
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+});
+
+const BRAND_BLUE = "#b5baff";
+const BRAND_YELLOW = "#FFFCDD";
+
+/**
+ * Glasachtige section met dropdown
+ */
 function ResourceSection({
   title,
+  label,
   description,
   defaultOpen = false,
   children,
@@ -21,8 +36,27 @@ function ResourceSection({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <Box w="full" borderTop="1px solid #111" pt={5}>
-      {/* Section header (dropdown trigger) */}
+    <Box
+      w="full"
+      borderRadius="2xl"
+      borderWidth="1px"
+      borderColor="rgba(255,255,255,0.16)"
+      bg="linear-gradient(135deg, rgba(255,252,221,0.03), rgba(181,186,255,0.05))"
+      boxShadow="0 18px 45px rgba(0,0,0,0.55)"
+      backdropFilter="blur(18px)"
+      p={{ base: 5, md: 6 }}
+      display="flex"
+      flexDirection="column"
+      justifyContent="flex-start"
+      transition="transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out, background 0.18s ease-out"
+      _hover={{
+        transform: "translateY(-3px)",
+        boxShadow: "0 22px 60px rgba(0,0,0,0.7)",
+        borderColor: "rgba(255,255,255,0.26)",
+        bg: "linear-gradient(135deg, rgba(255,252,221,0.06), rgba(181,186,255,0.1))",
+      }}
+    >
+      {/* Header / dropdown trigger */}
       <Box
         as="button"
         type="button"
@@ -35,25 +69,109 @@ function ResourceSection({
         mb={isOpen ? 4 : 1}
       >
         <VStack align="flex-start" spacing={1}>
+          {label && (
+            <Text
+              fontSize={{ base: "xs", md: "xs" }}
+              textTransform="uppercase"
+              letterSpacing="0.14em"
+              color="rgba(181,186,255,0.8)"
+            >
+              {label}
+            </Text>
+          )}
+
           <Heading
             fontSize={{ base: "lg", md: "xl" }}
-            letterSpacing="-0.4px"
-            lineHeight="1.3"
+            letterSpacing="-0.01em"
+            lineHeight={1.2}
+            color={BRAND_YELLOW}
           >
             {title}
           </Heading>
+
           {description && (
-            <Text fontSize="sm" color="gray.400" maxW="640px" lineHeight="1.6">
+            <Text
+              fontSize="sm"
+              color="rgba(255,255,255,0.78)"
+              maxW="40rem"
+              lineHeight={1.9}
+            >
               {description}
             </Text>
           )}
         </VStack>
-        <Box fontSize="xl" color="gray.500" pl={4} pt={1} aria-hidden="true">
+
+        <Box
+          fontSize="xl"
+          color={isOpen ? BRAND_BLUE : "rgba(255,255,255,0.6)"}
+          pl={4}
+          pt={label ? 5 : 3}
+          aria-hidden="true"
+        >
           {isOpen ? "−" : "+"}
         </Box>
       </Box>
 
-      {isOpen && <Box>{children}</Box>}
+      {isOpen && (
+        <Box borderTop="1px solid rgba(255,255,255,0.08)" pt={4}>
+          {children}
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+/**
+ * Kleinere kaart voor links / patterns (binnen sections)
+ */
+function ResourceCard({ href, title, children, badge }) {
+  const content = (
+    <Box
+      bg="#050509"
+      borderRadius="xl"
+      borderWidth="1px"
+      borderColor="rgba(255,255,255,0.16)"
+      p={4}
+      transition="all 0.16s ease-out"
+      _hover={{
+        borderColor: "rgba(181,186,255,0.7)",
+        bg: "#0b0b12",
+        transform: "translateY(-2px)",
+      }}
+    >
+      <Heading
+        size="sm"
+        mb={badge ? 1 : 2}
+        letterSpacing="-0.01em"
+        color={BRAND_YELLOW}
+      >
+        {title}
+      </Heading>
+      {badge && (
+        <Badge
+          mt={0}
+          mb={2}
+          fontSize="0.7rem"
+          borderRadius="full"
+          px={2}
+          py={0.5}
+          bg="#191919"
+          color="gray.200"
+        >
+          {badge}
+        </Badge>
+      )}
+      <Text fontSize="sm" color="rgba(255,255,255,0.8)" lineHeight={1.9}>
+        {children}
+      </Text>
+    </Box>
+  );
+
+  if (!href) return content;
+
+  return (
+    <Box as={Link} href={href}>
+      {content}
     </Box>
   );
 }
@@ -69,423 +187,245 @@ export default function ResourcesPage() {
       pt={{ base: 10, md: 16 }}
       pb={{ base: 12, md: 20 }}
     >
-      {/* Page Header */}
-      <VStack align="flex-start" spacing={3} mb={10} maxW="720px">
-        <Heading
-          fontSize={{ base: "2xl", md: "3xl" }}
-          letterSpacing="-0.6px"
-          lineHeight="1.2"
-        >
-          Resources
-        </Heading>
-        <Text fontSize="sm" color="gray.300" lineHeight="1.7">
-          A collection of tools, learning materials, and development systems I
-          use to build high-quality projects efficiently.
-        </Text>
-      </VStack>
+      <VStack
+        align="flex-start"
+        spacing={{ base: 10, md: 12 }}
+        maxW="6xl"
+        mx="auto"
+      >
+        {/* Header / intro */}
+        <Box w="full">
+          <Text
+            fontSize={{ base: "sm", md: "md" }}
+            fontWeight="600"
+            textTransform="uppercase"
+            letterSpacing="0.18em"
+            color="rgba(255,255,255,0.55)"
+            mb={3}
+          >
+            Resources
+          </Text>
 
-      <VStack align="flex-start" spacing={10} maxW="960px">
+          <Heading
+            as="h1"
+            fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+            lineHeight={1.2}
+            letterSpacing="-0.01em"
+            color={BRAND_YELLOW}
+            className={playfair.className}
+            mb={3}
+          >
+            Playbooks, blueprints & learning notes.
+          </Heading>
+
+          <Text
+            fontSize={{ base: "sm", md: "md" }}
+            color="rgba(255,255,255,0.78)"
+            maxW="42rem"
+            lineHeight={1.9}
+          >
+            I document the systems, patterns and explanations that help me build
+            full-stack applications faster — and explain the deeper concepts in
+            a calm, structured way.
+          </Text>
+        </Box>
+
         {/* 1. Project Playbooks */}
         <ResourceSection
+          label="Systems"
           title="Project Playbooks"
           description="The core systems I use to start projects quickly and keep my workflow consistent — from React frontends to full-stack APIs and database design."
-          defaultOpen={true}
         >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
-            <Box
-              as={Link}
+            <ResourceCard
               href="/playbooks/react-app-playbook"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="React App Playbook"
             >
-              <Heading size="sm" mb={2} letterSpacing="-0.2px">
-                React App Playbook
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
-                My structure for React projects: components, hooks, UI system,
-                routing patterns, and state management.
-              </Text>
-            </Box>
+              My structure for React projects: components, hooks, UI system,
+              routing patterns, and state management.
+            </ResourceCard>
 
-            <Box
-              as={Link}
+            <ResourceCard
               href="/playbooks/full-stack-api-playbook"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Full-Stack API Playbook"
             >
-              <Heading size="sm" mb={2} letterSpacing="-0.2px">
-                Full-Stack API Playbook
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
-                Node.js + Express + Prisma setup, error handling, validation
-                with Zod, and database workflow.
-              </Text>
-            </Box>
+              Node.js + Express + Prisma setup, error handling, validation with
+              Zod, and database workflow.
+            </ResourceCard>
 
-            <Box
-              as={Link}
+            <ResourceCard
               href="/playbooks/nextjs-application-playbook"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Next.js Application Playbook"
             >
-              <Heading size="sm" mb={2} letterSpacing="-0.2px">
-                Next.js Application Playbook
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
-                My go-to template for data-driven web apps using the App Router,
-                Server Components, and schema-first design.
-              </Text>
-            </Box>
+              My go-to template for data-driven web apps using the App Router,
+              Server Components, and schema-first design.
+            </ResourceCard>
 
-            <Box
-              as={Link}
+            <ResourceCard
               href="/playbooks/database-schema-design-guide"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Database Schema & Design Guide"
             >
-              <Heading size="sm" mb={2} letterSpacing="-0.2px">
-                Database Schema & Design Guide
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
-                Principles I follow to design scalable relational database
-                schemas before writing backend code.
-              </Text>
-            </Box>
+              Principles I follow to design scalable relational database schemas
+              before writing backend code.
+            </ResourceCard>
 
-            <Box
-              as={Link}
+            <ResourceCard
               href="/playbooks/error-handling-api-response-patterns"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Error Handling & API Responses"
             >
-              <Heading size="sm" mb={2} letterSpacing="-0.2px">
-                Error Handling & API Responses
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6">
-                How I keep API responses predictable, secure, and easy to work
-                with in frontends.
-              </Text>
-            </Box>
+              How I keep API responses predictable, secure, and easy to work
+              with in frontends.
+            </ResourceCard>
           </SimpleGrid>
         </ResourceSection>
 
         {/* 2. Project Blueprints */}
         <ResourceSection
+          label="Patterns"
           title="Project Blueprints"
           description="Reusable implementation patterns for real-world features. Each blueprint focuses on one thing — with routes, API shape, and UI behaviour already thought through."
         >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
-            {/* Authentication Flow Blueprint */}
-            <Box
-              as={Link}
+            <ResourceCard
               href="/blueprints/authentication-flow-blueprint"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Authentication Flow Blueprint"
+              badge="Detailed"
             >
-              <Heading size="sm" mb={1} letterSpacing="-0.2px">
-                Authentication Flow Blueprint
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
-                A complete login / signup / logout flow with protected routes,
-                refresh tokens, and role-based access that I can plug into new
-                projects.
-              </Text>
-              <Badge
-                mt={1}
-                fontSize="0.7rem"
-                borderRadius="full"
-                px={2}
-                py={0.5}
-                bg="#191919"
-              >
-                Detailed
-              </Badge>
-            </Box>
+              A complete login / signup / logout flow with protected routes,
+              refresh tokens, and role-based access that I can plug into new
+              projects.
+            </ResourceCard>
 
-            {/* CRUD API Blueprint */}
-            <Box
-              as={Link}
+            <ResourceCard
               href="/blueprints/crud-api-blueprint"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="CRUD API Blueprint"
+              badge="In progress"
             >
-              <Heading size="sm" mb={1} letterSpacing="-0.2px">
-                CRUD API Blueprint
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
-                A standard pattern for list / detail / create / update / delete
-                endpoints with pagination and predictable responses.
-              </Text>
-              <Badge
-                mt={1}
-                fontSize="0.7rem"
-                borderRadius="full"
-                px={2}
-                py={0.5}
-                bg="#191919"
-              >
-                In progress
-              </Badge>
-            </Box>
+              A standard pattern for list / detail / create / update / delete
+              endpoints with pagination and predictable responses.
+            </ResourceCard>
 
-            {/* UI Pattern: Lists / Cards / Modals */}
-            <Box
-              as={Link}
+            <ResourceCard
               href="/blueprints/ui-lists-cards-modals-blueprint"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="UI Pattern: Lists / Cards / Modals"
+              badge="In progress"
             >
-              <Heading size="sm" mb={1} letterSpacing="-0.2px">
-                UI Pattern: Lists / Cards / Modals
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
-                A reusable layout for list overviews, detail modals and card
-                grids — perfect for dashboards and content-heavy pages.
-              </Text>
-              <Badge
-                mt={1}
-                fontSize="0.7rem"
-                borderRadius="full"
-                px={2}
-                py={0.5}
-                bg="#191919"
-              >
-                In progress
-              </Badge>
-            </Box>
+              A reusable layout for list overviews, detail modals and card grids
+              — perfect for dashboards and content-heavy pages.
+            </ResourceCard>
 
-            {/* Filtering & Sorting Logic */}
-            <Box
-              as={Link}
+            <ResourceCard
               href="/blueprints/filtering-and-sorting-logic-blueprint"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Filtering & Sorting Logic"
+              badge="In progress"
             >
-              <Heading size="sm" mb={1} letterSpacing="-0.2px">
-                Filtering &amp; Sorting Logic
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
-                A pattern for keeping filters, sort state and URL params in sync
-                when working with large datasets.
-              </Text>
-              <Badge
-                mt={1}
-                fontSize="0.7rem"
-                borderRadius="full"
-                px={2}
-                py={0.5}
-                bg="#191919"
-              >
-                In progress
-              </Badge>
-            </Box>
+              A pattern for keeping filters, sort state and URL params in sync
+              when working with large datasets.
+            </ResourceCard>
 
-            {/* Loading Skeleton Patterns */}
-            <Box
-              as={Link}
+            <ResourceCard
               href="/blueprints/loading-skeleton-patterns-blueprint"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Loading Skeleton Patterns"
+              badge="In progress"
             >
-              <Heading size="sm" mb={1} letterSpacing="-0.2px">
-                Loading Skeleton Patterns
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
-                Reusable skeleton states for tables, cards and detail views so
-                the UI feels fast while data loads.
-              </Text>
-              <Badge
-                mt={1}
-                fontSize="0.7rem"
-                borderRadius="full"
-                px={2}
-                py={0.5}
-                bg="#191919"
-              >
-                In progress
-              </Badge>
-            </Box>
+              Reusable skeleton states for tables, cards and detail views so the
+              UI feels fast while data loads.
+            </ResourceCard>
 
-            {/* Form Validation Blueprint */}
-            <Box
-              as={Link}
+            <ResourceCard
               href="/blueprints/form-validation-blueprint"
-              bg="#0b0b0b"
-              border="1px solid #222"
-              borderRadius="lg"
-              p={4}
-              _hover={{
-                borderColor: "#444",
-                bg: "#101010",
-                transform: "translateY(-1px)",
-              }}
-              transition="all 0.15s ease-out"
+              title="Form Validation Blueprint"
+              badge="In progress"
             >
-              <Heading size="sm" mb={1} letterSpacing="-0.2px">
-                Form Validation Blueprint
-              </Heading>
-              <Text fontSize="sm" color="gray.400" lineHeight="1.6" mb={3}>
-                A schema-first form setup using Zod and React Hook Form with
-                predictable error messages and UX patterns.
-              </Text>
-              <Badge
-                mt={1}
-                fontSize="0.7rem"
-                borderRadius="full"
-                px={2}
-                py={0.5}
-                bg="#191919"
-              >
-                In progress
-              </Badge>
-            </Box>
+              A schema-first form setup using Zod and React Hook Form with
+              predictable error messages and UX patterns.
+            </ResourceCard>
           </SimpleGrid>
         </ResourceSection>
 
         {/* 3. Best Learning Content (Instagram Reels) */}
         <ResourceSection
+          label="Learning"
           title="Best Learning Content"
-          description="A curated selection of my educational reels that helped me learn, teach others, and grow my developer network."
+          description="Short, visual explanations that helped me understand core concepts — and teach them back to other developers."
         >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
             {[
-              "HTTP Status Codes Explained",
-              "React Hooks Breakdown",
-              "JavaScript Array Methods",
-              "The DOM vs The Shadow DOM",
-              "WebGPU in 60 Seconds",
-              "API Calls Explained Simply",
-            ].map((title) => (
+              {
+                title: "React Hooks — Part 2",
+                desc: "A simple visual breakdown of advanced React hooks.",
+                img: "/learning/react-hooks-part-2.png",
+                url: "https://www.instagram.com/reel/DRZPxZGDCG4/",
+              },
+              {
+                title: "GitHub Collab",
+                desc: "How to actually collaborate as a developer using GitHub.",
+                img: "/learning/github-collab.png",
+                url: "https://www.instagram.com/reel/DRC6cwWDCw4/",
+              },
+              {
+                title: "401 ≠ 403 — Know the Difference",
+                desc: "Both mean ‘access denied’ — but for different reasons.",
+                img: "/learning/know-the-difference.png",
+                url: "https://www.instagram.com/reel/DQKAxeQjP78/",
+              },
+              {
+                title: "Master the Terminal",
+                desc: "The 5 essential commands every developer should know.",
+                img: "/learning/master-the-terminal.png",
+                url: "https://www.instagram.com/p/DPGX1S0DRSs/?img_index=1",
+              },
+            ].map((item) => (
               <Box
-                key={title}
-                bg="#0b0b0b"
-                border="1px solid #222"
-                borderRadius="lg"
-                p={4}
+                key={item.title}
+                as={Link}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                bg="#050509"
+                border="1px solid rgba(255,255,255,0.16)"
+                borderRadius="xl"
+                overflow="hidden"
+                transition="all 0.18s ease-out"
+                _hover={{
+                  borderColor: "rgba(181,186,255,0.7)",
+                  transform: "translateY(-2px)",
+                  bg: "#0b0b12",
+                }}
               >
-                <Heading size="sm" mb={2} letterSpacing="-0.2px">
-                  {title}
-                </Heading>
-                <Text fontSize="sm" color="gray.400" lineHeight="1.6">
-                  One of my most helpful short-form explanations for teaching
-                  and learning.
-                </Text>
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  width={600}
+                  height={340}
+                  style={{
+                    width: "100%",
+                    height: "140px",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+
+                <Box p={3}>
+                  <Heading
+                    size="sm"
+                    mb={1}
+                    letterSpacing="-0.01em"
+                    color={BRAND_YELLOW}
+                  >
+                    {item.title}
+                  </Heading>
+                  <Text
+                    fontSize="xs"
+                    color="rgba(255,255,255,0.8)"
+                    lineHeight={1.9}
+                  >
+                    {item.desc}
+                  </Text>
+                </Box>
               </Box>
             ))}
           </SimpleGrid>
-        </ResourceSection>
-
-        {/* 4. Tools */}
-        <ResourceSection
-          title="Tools I Use"
-          description="The core tools that are almost always open when I'm building or debugging applications."
-        >
-          <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4} w="full">
-            {[
-              "VS Code",
-              "Postman",
-              "Prisma Studio",
-              "Chrome DevTools",
-              "GitHub Desktop",
-              "Node.js",
-            ].map((tool) => (
-              <Box
-                key={tool}
-                bg="#0b0b0b"
-                border="1px solid #222"
-                borderRadius="lg"
-                p={3}
-              >
-                <Text fontSize="sm" lineHeight="1.5">
-                  {tool}
-                </Text>
-              </Box>
-            ))}
-          </SimpleGrid>
-
-          <Text fontSize="xs" color="gray.500" mt={3}>
-            (More tools will be added as my stack grows.)
-          </Text>
         </ResourceSection>
       </VStack>
     </Box>
