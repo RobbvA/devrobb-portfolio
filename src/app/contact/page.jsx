@@ -1,6 +1,7 @@
 // src/app/contact/page.jsx
 "use client";
 
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -23,6 +24,30 @@ const playfair = Playfair_Display({
 });
 
 export default function ContactPage() {
+  const [status, setStatus] = useState(null); // "success" | "error" | "submitting" | null
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      setStatus("submitting");
+
+      await fetch("https://formspree.io/f/mnnkwqkg", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+    }
+  }
+
   return (
     <Box
       as="main"
@@ -79,7 +104,7 @@ export default function ContactPage() {
                 fontWeight="500"
                 color="#b5baff"
               >
-                Open for junior roles, freelance work and collabs.
+                Reach out for junior roles, freelance work or a small collab.
               </Text>
 
               <Text
@@ -88,10 +113,9 @@ export default function ContactPage() {
                 maxW="40rem"
                 lineHeight={1.8}
               >
-                Whether it&apos;s a web app idea, a long-term product, or a
-                single feature you want to ship faster — tell me what you have
-                in mind. I like clear expectations, small iterations, and code
-                that feels calm to work in.
+                I like clear communication, realistic scope and simple planning.
+                If that matches how you work, send me a message and I&apos;ll
+                get back to you soon.
               </Text>
             </VStack>
           </Flex>
@@ -119,131 +143,185 @@ export default function ContactPage() {
             <Heading
               as="h2"
               fontSize={{ base: "lg", md: "xl" }}
-              mb={4}
+              mb={3}
               color="#FFFCDD"
             >
-              Send me a message.
+              Send a short message.
             </Heading>
 
-            <VStack align="flex-start" spacing={4} w="full" as="form">
-              {/* Name */}
-              <Box w="full">
-                <Text
-                  as="label"
-                  htmlFor="name"
-                  fontSize="sm"
-                  color="rgba(255,255,255,0.8)"
-                  mb={1.5}
-                  display="block"
-                >
-                  Name
-                </Text>
-                <Input
-                  id="name"
-                  placeholder="Your name"
-                  bg="#111111"
-                  border="1px solid #222222"
+            <Text
+              fontSize="sm"
+              color="rgba(255,255,255,0.78)"
+              mb={4}
+              lineHeight={1.7}
+            >
+              A few lines about your idea, project or question is enough.
+              I&apos;ll reply by email.
+            </Text>
+
+            {/* Form zonder action/method → we gebruiken handleSubmit */}
+            <Box as="form" onSubmit={handleSubmit} w="full">
+              {/* Hidden subject voor in je inbox */}
+              <input
+                type="hidden"
+                name="_subject"
+                value="New message from dev.robb portfolio"
+              />
+
+              <VStack align="flex-start" spacing={4} w="full">
+                {/* Name */}
+                <Box w="full">
+                  <Text
+                    as="label"
+                    htmlFor="name"
+                    fontSize="sm"
+                    color="rgba(255,255,255,0.8)"
+                    mb={1.5}
+                    display="block"
+                  >
+                    Name
+                  </Text>
+                  <Input
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    bg="#111111"
+                    border="1px solid #222222"
+                    borderRadius="lg"
+                    fontSize="sm"
+                    _placeholder={{ color: "rgba(255,255,255,0.45)" }}
+                    _focus={{
+                      borderColor: "#b5baff",
+                      boxShadow: "0 0 0 1px rgba(181,186,255,0.5)",
+                      bg: "#121212",
+                    }}
+                    required
+                  />
+                </Box>
+
+                {/* Email */}
+                <Box w="full">
+                  <Text
+                    as="label"
+                    htmlFor="email"
+                    fontSize="sm"
+                    color="rgba(255,255,255,0.8)"
+                    mb={1.5}
+                    display="block"
+                  >
+                    Email
+                  </Text>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    bg="#111111"
+                    border="1px solid #222222"
+                    borderRadius="lg"
+                    fontSize="sm"
+                    _placeholder={{ color: "rgba(255,255,255,0.45)" }}
+                    _focus={{
+                      borderColor: "#b5baff",
+                      boxShadow: "0 0 0 1px rgba(181,186,255,0.5)",
+                      bg: "#121212",
+                    }}
+                    required
+                  />
+                </Box>
+
+                {/* Message */}
+                <Box w="full">
+                  <Text
+                    as="label"
+                    htmlFor="message"
+                    fontSize="sm"
+                    color="rgba(255,255,255,0.8)"
+                    mb={1.5}
+                    display="block"
+                  >
+                    Project / message
+                  </Text>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Share a bit about your project, idea, or question..."
+                    rows={5}
+                    bg="#111111"
+                    border="1px solid #222222"
+                    borderRadius="lg"
+                    fontSize="sm"
+                    _placeholder={{ color: "rgba(255,255,255,0.45)" }}
+                    _focus={{
+                      borderColor: "#b5baff",
+                      boxShadow: "0 0 0 1px rgba(181,186,255,0.5)",
+                      bg: "#121212",
+                    }}
+                    required
+                  />
+                </Box>
+
+                <Button
+                  mt={2}
+                  w="full"
+                  size="md"
+                  bg="#b5baff"
+                  color="#000"
                   borderRadius="lg"
-                  fontSize="sm"
-                  _placeholder={{ color: "rgba(255,255,255,0.45)" }}
-                  _focus={{
-                    borderColor: "#b5baff",
-                    boxShadow: "0 0 0 1px rgba(181,186,255,0.5)",
-                    bg: "#121212",
+                  fontWeight="600"
+                  _hover={{
+                    bg: status === "submitting" ? "#b5baff" : "#cac4ff",
+                    transform:
+                      status === "submitting" ? "none" : "translateY(-1px)",
                   }}
-                />
-              </Box>
-
-              {/* Email */}
-              <Box w="full">
-                <Text
-                  as="label"
-                  htmlFor="email"
-                  fontSize="sm"
-                  color="rgba(255,255,255,0.8)"
-                  mb={1.5}
-                  display="block"
+                  _active={{
+                    bg: "#a19bff",
+                    transform: "translateY(0)",
+                  }}
+                  transition="all 0.16s ease-out"
+                  type="submit"
+                  isDisabled={status === "submitting"}
                 >
-                  Email
-                </Text>
-                <Input
-                  id="email"
-                  placeholder="you@example.com"
-                  type="email"
-                  bg="#111111"
-                  border="1px solid #222222"
-                  borderRadius="lg"
-                  fontSize="sm"
-                  _placeholder={{ color: "rgba(255,255,255,0.45)" }}
-                  _focus={{
-                    borderColor: "#b5baff",
-                    boxShadow: "0 0 0 1px rgba(181,186,255,0.5)",
-                    bg: "#121212",
-                  }}
-                />
-              </Box>
+                  {status === "submitting" ? "Sending..." : "Send message"}
+                </Button>
 
-              {/* Message */}
-              <Box w="full">
-                <Text
-                  as="label"
-                  htmlFor="message"
-                  fontSize="sm"
-                  color="rgba(255,255,255,0.8)"
-                  mb={1.5}
-                  display="block"
-                >
-                  Project / message
-                </Text>
-                <Textarea
-                  id="message"
-                  placeholder="Share a bit about your project, timeline, or idea..."
-                  rows={5}
-                  bg="#111111"
-                  border="1px solid #222222"
-                  borderRadius="lg"
-                  fontSize="sm"
-                  _placeholder={{ color: "rgba(255,255,255,0.45)" }}
-                  _focus={{
-                    borderColor: "#b5baff",
-                    boxShadow: "0 0 0 1px rgba(181,186,255,0.5)",
-                    bg: "#121212",
-                  }}
-                />
-              </Box>
+                {/* Status feedback onder het formulier */}
+                {status === "success" && (
+                  <Text
+                    fontSize="xs"
+                    color="rgba(144,238,144,0.9)"
+                    mt={1}
+                    lineHeight={1.6}
+                  >
+                    Thanks for your message — I’ll reach out soon.
+                  </Text>
+                )}
 
-              <Button
-                mt={2}
-                w="full"
-                size="md"
-                bg="#b5baff"
-                color="#000"
-                borderRadius="lg"
-                fontWeight="600"
-                _hover={{
-                  bg: "#cac4ff",
-                  transform: "translateY(-1px)",
-                }}
-                _active={{
-                  bg: "#a19bff",
-                  transform: "translateY(0)",
-                }}
-                transition="all 0.16s ease-out"
-                type="button"
-              >
-                Send message
-              </Button>
+                {status === "error" && (
+                  <Text
+                    fontSize="xs"
+                    color="rgba(255,120,120,0.9)"
+                    mt={1}
+                    lineHeight={1.6}
+                  >
+                    Something went wrong while sending your message. Please try
+                    again later.
+                  </Text>
+                )}
 
-              <Text
-                fontSize="xs"
-                color="rgba(255,255,255,0.55)"
-                mt={1}
-                lineHeight={1.6}
-              >
-                This form is currently frontend-only. For production use I would
-                connect it to an email service or API endpoint.
-              </Text>
-            </VStack>
+                {status === null && (
+                  <Text
+                    fontSize="xs"
+                    color="rgba(255,255,255,0.55)"
+                    mt={1}
+                    lineHeight={1.6}
+                  >
+                    This form uses Formspree to send your message directly to my
+                    inbox.
+                  </Text>
+                )}
+              </VStack>
+            </Box>
           </GlassCard>
 
           {/* Card 2 — Direct contact / links */}
@@ -255,7 +333,7 @@ export default function ContactPage() {
               color="rgba(181,186,255,0.7)"
               mb={3}
             >
-              Direct contact
+              Other ways to reach me
             </Text>
 
             <Heading
@@ -264,37 +342,36 @@ export default function ContactPage() {
               mb={3}
               color="#FFFCDD"
             >
-              Prefer a direct message?
+              Pick whatever channel fits best.
             </Heading>
 
             <VStack align="flex-start" spacing={3}>
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                I&apos;m most active on GitHub and Instagram. Feel free to reach
-                out if you:
+                You can contact me directly if you prefer not to use the form:
               </Text>
 
-              <VStack align="flex-start" spacing={1.5}>
+              <VStack align="flex-start" spacing={2}>
                 <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                  • want to collaborate on a project or idea
+                  • Email for jobs, collabs or project ideas.
                 </Text>
                 <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                  • are looking for a junior fullstack dev
+                  • GitHub if you want to look at my code or open an issue.
                 </Text>
                 <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                  • have feedback on my content or portfolio
+                  • Instagram for quick questions or content-related chat.
                 </Text>
               </VStack>
 
               <Stack spacing={2} mt={3}>
-                <ContactLink label="Email" href="mailto:your-email@example.com">
-                  your-email@example.com
+                <ContactLink
+                  label="Email"
+                  href="mailto:robbertasselt@gmail.com"
+                >
+                  robbertasselt@gmail.com
                 </ContactLink>
 
-                <ContactLink
-                  label="GitHub"
-                  href="https://github.com/your-github"
-                >
-                  github.com/your-github
+                <ContactLink label="GitHub" href="https://github.com/dev-robb">
+                  github.com/dev-robb
                 </ContactLink>
 
                 <ContactLink
@@ -311,9 +388,8 @@ export default function ContactPage() {
                 mt={3}
                 lineHeight={1.7}
               >
-                In general I reply within a day. If it&apos;s time-sensitive,
-                mention your deadline in the first message so I can be clear
-                about what&apos;s realistic.
+                I usually respond within a day. If something is time-sensitive,
+                it helps if you mention your timeline in the first message.
               </Text>
             </VStack>
           </GlassCard>
