@@ -68,13 +68,14 @@ export default function HomePage() {
               style={{ marginBottom: "14px" }}
             >
               <Text
-                fontSize={{ base: "xs", md: "sm" }}
+                fontSize={{ base: "sm", md: "md", lg: "lg" }}
+                fontWeight="600"
                 textTransform="uppercase"
                 letterSpacing="0.18em"
                 color="rgba(255,255,255,0.55)"
-                mb={0.5}
+                mb={4}
               >
-                Full-stack developer
+                Full-Stack Developer • AI-Driven Architecture Workflow
               </Text>
 
               <Heading
@@ -98,7 +99,7 @@ export default function HomePage() {
                 letterSpacing="0.18em"
                 mb={10}
               >
-                dev.robb · Web development
+                dev.robb · Software engineering
               </Text>
             </MotionBox>
 
@@ -110,16 +111,20 @@ export default function HomePage() {
               mt={{ base: 1, md: 2 }}
             >
               <Text
-                fontSize={{ base: "md", md: "lg" }}
+                fontSize={{ base: "sm", md: "md" }}
                 color="rgba(255,255,255,0.78)"
-                maxW="75ch"
-                lineHeight={2.3}
-                letterSpacing={"0.03em"}
+                maxW="70ch"
+                lineHeight={1.9}
+                letterSpacing="0.01em"
                 mb={5}
               >
-                I build full-stack applications using React and Next.js on the
-                frontend, and Node.js, Express and Prisma on the backend —
-                powered by SQLite for fast, lightweight data.
+                I work with an AI-driven development workflow: designing modular
+                system architecture, defining data models and flows, and then
+                using AI to accelerate implementation while maintaining clean,
+                scalable code. The stack I use is modern and predictable —
+                React, Next.js, Node, Express and Prisma — but the
+                architecture-first approach is what keeps everything structured
+                and maintainable.
               </Text>
             </MotionBox>
 

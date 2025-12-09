@@ -99,7 +99,7 @@ export default function AboutPage() {
                 fontWeight="500"
                 color="#b5baff"
               >
-                Fullstack Developer
+                AI-Native Full-Stack Developer
               </Text>
 
               <Text
@@ -108,11 +108,12 @@ export default function AboutPage() {
                 maxW="40rem"
                 lineHeight={1.8}
               >
-                I moved into web development after years in a different
-                industry. The work taught me structure, responsibility, and a
-                calm mindset — qualities I now bring into my code. Today I focus
-                on building clear, practical web apps and explaining the deeper
-                tech in simple terms.
+                I work with an architecture-first approach: defining the
+                structure, data flow and constraints before writing any code. AI
+                helps me iterate faster, generate implementation options, and
+                refine solutions — but the system design always comes first. I
+                like building clean, predictable web applications and improving
+                my workflow through consistent documentation and playbooks.
               </Text>
             </VStack>
           </Flex>
@@ -143,25 +144,25 @@ export default function AboutPage() {
               mb={3}
               color="#FFFCDD"
             >
-              Communication, ownership, calm focus.
+              Clear communication, structured thinking, steady focus.
             </Heading>
 
             <VStack align="flex-start" spacing={2.5}>
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I like clear, honest communication — structured, to the point,
-                without drama.
+                • I communicate clearly and directly — structure over noise,
+                solutions over drama.
               </Text>
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I enjoy explaining what I learn in simple language, through
-                short web dev content and playbooks.
+                • I explain complex technical ideas in simple language, through
+                playbooks and content.
               </Text>
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I take responsibility for my work and follow through on what I
-                commit to.
+                • I take ownership of my work and keep the process transparent
+                and predictable.
               </Text>
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I treat every project as a chance to grow — in both code and
-                workflow.
+                • I stay calm under pressure and break problems into manageable
+                layers.
               </Text>
             </VStack>
           </GlassCard>
@@ -184,7 +185,7 @@ export default function AboutPage() {
               mb={3}
               color="#FFFCDD"
             >
-              The tools I like to build with.
+              Tools I use inside an architecture-first workflow.
             </Heading>
 
             <VStack align="flex-start" spacing={3}>
@@ -209,8 +210,10 @@ export default function AboutPage() {
               </Stack>
 
               <Text fontSize="sm" color="rgba(255,255,255,0.75)" mt={2}>
-                I prefer a small, predictable stack so I can focus on solving
-                real problems instead of fighting tooling.
+                I prefer a small, predictable stack so I can focus on
+                architecture and problem-solving instead of fighting tooling.
+                React, Next.js, Node, Express and Prisma give me everything I
+                need to build clean, maintainable systems.
               </Text>
             </VStack>
           </GlassCard>
@@ -233,28 +236,28 @@ export default function AboutPage() {
               mb={3}
               color="#FFFCDD"
             >
-              Work in clear layers. Keep it practical.
+              Architecture first. AI for acceleration. Quality by design.
             </Heading>
 
             <VStack align="flex-start" spacing={2.5}>
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I like to start with a simple plan: what we&apos;re building,
-                which stack we use, and how to structure it.
+                • I start with the system: domain models, data flow, boundaries
+                and constraints — before thinking about code.
               </Text>
 
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I work in small, focused steps — one layer at a time, instead
-                of trying to build everything at once.
+                • I use AI to explore implementation options, generate
+                scaffolding and speed up refactoring — not to replace thinking.
               </Text>
 
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • I write my own playbooks for debugging and workflows so I can
-                reuse what works.
+                • I document what works in playbooks so my workflow stays
+                consistent across projects.
               </Text>
 
               <Text fontSize="sm" color="rgba(255,255,255,0.8)">
-                • In Git I prefer small, clear commits to keep the project
-                history clean and easy to understand.
+                • I prefer small, focused commits and clear reasoning so every
+                codebase stays understandable.
               </Text>
             </VStack>
           </GlassCard>

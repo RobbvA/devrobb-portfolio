@@ -215,7 +215,7 @@ export default function ResourcesPage() {
             className={playfair.className}
             mb={3}
           >
-            Playbooks, blueprints & learning notes.
+            Architecture, AI-driven playbooks & learning notes.
           </Heading>
 
           <Text
@@ -224,11 +224,66 @@ export default function ResourcesPage() {
             maxW="42rem"
             lineHeight={1.9}
           >
-            I document the systems, patterns and explanations that help me build
-            full-stack applications faster — and explain the deeper concepts in
-            a calm, structured way.
+            I document the systems, patterns and AI-assisted workflows that help
+            me design and build full-stack applications in an architecture-first
+            way. These notes keep my process calm, structured and repeatable.
           </Text>
         </Box>
+
+        {/* 0. AI-Driven Development Playbooks */}
+        <ResourceSection
+          label="Workflow"
+          title="AI-Driven Development Playbooks"
+          description="How I use an architecture-first workflow with AI to design, implement and debug modern web systems."
+          defaultOpen={true}
+        >
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
+            <ResourceCard
+              href="/playbooks/architecture-first-workflow"
+              title="Architecture-First Workflow"
+            >
+              A structured method for planning any project: problem space,
+              constraints, data models, system boundaries and modules — before
+              writing code.
+            </ResourceCard>
+
+            <ResourceCard
+              href="/playbooks/ai-assisted-implementation-guide"
+              title="AI-Assisted Implementation Guide"
+            >
+              How I use AI to generate scaffolding, explore implementation
+              options and refactor code while staying in control of the system
+              design.
+            </ResourceCard>
+
+            <ResourceCard
+              href="/playbooks/data-modeling-and-flow-design"
+              title="Data Modeling & Flow Design Handbook"
+            >
+              Principles and patterns for designing clean data models and flows
+              that connect frontend state, APIs and the database in a
+              predictable way.
+            </ResourceCard>
+
+            <ResourceCard
+              href="/playbooks/system-debugging-and-architecture-repair"
+              title="System Debugging & Architecture Repair"
+            >
+              A step-by-step approach to finding root causes, repairing broken
+              flows and using AI safely to validate hypotheses instead of
+              guessing.
+            </ResourceCard>
+
+            <ResourceCard
+              href="/playbooks/development-consistency-and-delivery"
+              title="Development Playbook: Consistency & Delivery"
+            >
+              Standards for project structure, commits, documentation and
+              release habits so every project feels coherent — with or without
+              AI tools.
+            </ResourceCard>
+          </SimpleGrid>
+        </ResourceSection>
 
         {/* 1. Project Playbooks */}
         <ResourceSection
