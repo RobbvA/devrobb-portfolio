@@ -19,6 +19,9 @@ export default function ProjectCarousel({
   const hasImages = safeImages.length > 0;
   const current = hasImages ? safeImages[index] : null;
 
+  // Logo should be a clean rectangle crop; UI screenshots should remain contain.
+  const isLogoLike = Boolean(current?.src && /LogoHero/i.test(current.src));
+
   function prev() {
     if (!hasImages) return;
     setIndex((i) => (i - 1 + safeImages.length) % safeImages.length);
@@ -37,10 +40,6 @@ export default function ProjectCarousel({
   function close() {
     setIsOpen(false);
   }
-
-  // Special-case the logo image: make it a clean, cropped rectangle (no padding).
-  // For UI screenshots, keep "contain" with padding to avoid cutting off UI.
-  const isLogoLike = Boolean(current?.src && /LogoHero/i.test(current.src));
 
   // Keyboard UX: Esc closes, arrows navigate (when open)
   useEffect(() => {
@@ -93,33 +92,17 @@ export default function ProjectCarousel({
             _hover={current ? { transform: "translateY(-1px)" } : undefined}
           >
             {current ? (
-              <>
-                {/* For LogoHero: clean crop into a rectangle */}
-                {isLogoLike ? (
-                  <Image
-                    src={current.src}
-                    alt={`${altBase} ${index + 1}`}
-                    fill
-                    priority={index === 0}
-                    style={{
-                      objectFit: "cover",
-                    }}
-                    sizes="(max-width: 768px) 100vw, 1100px"
-                  />
-                ) : (
-                  <Image
-                    src={current.src}
-                    alt={`${altBase} ${index + 1}`}
-                    fill
-                    priority={index === 0}
-                    style={{
-                      objectFit: "contain",
-                      padding: "16px",
-                    }}
-                    sizes="(max-width: 768px) 100vw, 1100px"
-                  />
-                )}
-              </>
+              <Image
+                src={current.src}
+                alt={`${altBase} ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="(max-width: 768px) 100vw, 1100px"
+                style={{
+                  objectFit: isLogoLike ? "cover" : "contain",
+                  padding: isLogoLike ? "0px" : "16px",
+                }}
+              />
             ) : (
               <Flex w="100%" h="100%" align="center" justify="center" px={6}>
                 <Text
@@ -220,7 +203,7 @@ export default function ProjectCarousel({
           justifyContent="center"
           px={{ base: 4, md: 8 }}
           py={{ base: 6, md: 10 }}
-          onClick={close} // click outside closes
+          onClick={close}
           style={{
             animation: "overlayFade 140ms ease-out",
           }}
@@ -243,12 +226,12 @@ export default function ProjectCarousel({
               src={current.src}
               alt={`${altBase} fullscreen ${index + 1}`}
               fill
+              sizes="(max-width: 768px) 96vw, 1100px"
+              priority
               style={{
                 objectFit: isLogoLike ? "cover" : "contain",
                 padding: isLogoLike ? "0px" : "20px",
               }}
-              sizes="(max-width: 768px) 96vw, 1100px"
-              priority
             />
 
             {/* Top bar */}

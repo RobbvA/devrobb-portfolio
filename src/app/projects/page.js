@@ -1,4 +1,4 @@
-// src/app/projects/page.jsx
+// src/app/projects/page.js
 "use client";
 
 import { useMemo, useState } from "react";
@@ -166,7 +166,7 @@ export default function ProjectsPage() {
 
   return (
     <Box as="main" minH="80dvh" bg="#000" color="#fff">
-      {/* Stable page shell: reduces layout variance between laptop and monitor */}
+      {/* Stable page shell: prevents wide-monitor stretch differences */}
       <Box
         w="full"
         px={{ base: 4, md: 6 }}
