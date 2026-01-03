@@ -38,6 +38,10 @@ export default function ProjectCarousel({
     setIsOpen(false);
   }
 
+  // Special-case the logo image: make it a clean, cropped rectangle (no padding).
+  // For UI screenshots, keep "contain" with padding to avoid cutting off UI.
+  const isLogoLike = Boolean(current?.src && /LogoHero/i.test(current.src));
+
   // Keyboard UX: Esc closes, arrows navigate (when open)
   useEffect(() => {
     if (!isOpen) return;
@@ -89,16 +93,33 @@ export default function ProjectCarousel({
             _hover={current ? { transform: "translateY(-1px)" } : undefined}
           >
             {current ? (
-              <Image
-                src={current.src}
-                alt={`${altBase} ${index + 1}`}
-                fill
-                priority={index === 0}
-                style={{
-                  objectFit: "contain",
-                  padding: "16px",
-                }}
-              />
+              <>
+                {/* For LogoHero: clean crop into a rectangle */}
+                {isLogoLike ? (
+                  <Image
+                    src={current.src}
+                    alt={`${altBase} ${index + 1}`}
+                    fill
+                    priority={index === 0}
+                    style={{
+                      objectFit: "cover",
+                    }}
+                    sizes="(max-width: 768px) 100vw, 1100px"
+                  />
+                ) : (
+                  <Image
+                    src={current.src}
+                    alt={`${altBase} ${index + 1}`}
+                    fill
+                    priority={index === 0}
+                    style={{
+                      objectFit: "contain",
+                      padding: "16px",
+                    }}
+                    sizes="(max-width: 768px) 100vw, 1100px"
+                  />
+                )}
+              </>
             ) : (
               <Flex w="100%" h="100%" align="center" justify="center" px={6}>
                 <Text
@@ -200,7 +221,6 @@ export default function ProjectCarousel({
           px={{ base: 4, md: 8 }}
           py={{ base: 6, md: 10 }}
           onClick={close} // click outside closes
-          // Smoothness
           style={{
             animation: "overlayFade 140ms ease-out",
           }}
@@ -214,7 +234,7 @@ export default function ProjectCarousel({
             bg="rgba(5,5,9,0.85)"
             boxShadow="0 24px 90px rgba(0,0,0,0.75)"
             overflow="hidden"
-            onClick={(e) => e.stopPropagation()} // prevent close when clicking image area
+            onClick={(e) => e.stopPropagation()}
             style={{
               animation: "panelPop 160ms ease-out",
             }}
@@ -224,8 +244,8 @@ export default function ProjectCarousel({
               alt={`${altBase} fullscreen ${index + 1}`}
               fill
               style={{
-                objectFit: "contain",
-                padding: "20px",
+                objectFit: isLogoLike ? "cover" : "contain",
+                padding: isLogoLike ? "0px" : "20px",
               }}
               sizes="(max-width: 768px) 96vw, 1100px"
               priority
@@ -321,7 +341,6 @@ export default function ProjectCarousel({
               </Text>
             </Box>
 
-            {/* Keyframes (scoped via global style) */}
             <style jsx global>{`
               @keyframes overlayFade {
                 from {
