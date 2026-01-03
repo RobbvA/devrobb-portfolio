@@ -235,7 +235,6 @@ export default function ResourcesPage() {
           label="Workflow"
           title="AI-Driven Development Playbooks"
           description="How I use an architecture-first workflow with AI to design, implement and debug modern web systems."
-          defaultOpen={true}
         >
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5} w="full">
             <ResourceCard

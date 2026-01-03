@@ -15,7 +15,7 @@ export const NAV_BOTTOM_HEIGHT = "64px";
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: FiHome },
   { label: "About", href: "/about", icon: FiUser },
-  { label: "Projects", href: "/gallery", icon: FiImage }, // was: Gallery
+  { label: "Projects", href: "/projects", icon: FiImage }, // was: Gallery
   { label: "Resources", href: "/resources", icon: FiInstagram }, // now points to /resources
 ];
 

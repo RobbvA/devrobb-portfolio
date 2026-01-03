@@ -189,7 +189,7 @@ export default function HomePage() {
               >
                 <Button
                   as={NextLink}
-                  href="/gallery"
+                  href="/projects"
                   bg="#b5baff"
                   color="#000"
                   fontWeight="600"
