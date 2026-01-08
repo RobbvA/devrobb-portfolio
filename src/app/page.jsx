@@ -111,20 +111,16 @@ export default function HomePage() {
               mt={{ base: 1, md: 2 }}
             >
               <Text
-                fontSize={{ base: "sm", md: "md" }}
-                color="rgba(255,255,255,0.78)"
-                maxW="70ch"
-                lineHeight={1.9}
-                letterSpacing="0.01em"
-                mb={5}
+                fontSize={{ base: "md", md: "lg" }}
+                color="rgba(255,255,255,0.85)"
+                maxW="60ch"
+                lineHeight={1.75}
+                mb={6}
               >
-                I work with an AI-driven development workflow: designing modular
-                system architecture, defining data models and flows, and then
-                using AI to accelerate implementation while maintaining clean,
-                scalable code. The stack I use is modern and predictable —
-                React, Next.js, Node, Express and Prisma — but the
-                architecture-first approach is what keeps everything structured
-                and maintainable.
+                I work with an AI-assisted development workflow. I design system
+                architecture and data flows first, then use AI to accelerate
+                implementation without sacrificing code quality. The result is
+                clean, scalable, and predictable software.
               </Text>
             </MotionBox>
 

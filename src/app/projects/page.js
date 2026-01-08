@@ -167,8 +167,7 @@ export default function ProjectsPage() {
 
   // Project 2 — CalmHub
   const calmHubLiveUrl = "https://collab-app-phi.vercel.app/";
-  // If you want a repo button later, add it here:
-  // const calmHubRepoUrl = "https://github.com/RobbvA/<calmhub-repo>";
+  const calmHubRepoUrl = "https://github.com/RobbvA/collab-app";
 
   const calmHubScreenshots = useMemo(
     () => [
@@ -228,10 +227,10 @@ export default function ProjectsPage() {
               </Heading>
 
               <Text
-                fontSize={{ base: "sm", md: "md" }}
-                color="rgba(255,255,255,0.78)"
-                maxW="52rem"
-                lineHeight={1.9}
+                fontSize={{ base: "md", md: "lg" }}
+                color="rgba(255,255,255,0.85)"
+                maxW="48rem"
+                lineHeight={1.75}
               >
                 A small selection of projects that represent how I think:
                 architecture first, predictable systems, and clean delivery.
@@ -419,8 +418,6 @@ export default function ProjectsPage() {
                         Live demo
                       </Button>
 
-                      {/* Add repo button when you have the URL */}
-                      {/* 
                       <Button
                         as={Link}
                         href={calmHubRepoUrl}
@@ -435,8 +432,7 @@ export default function ProjectsPage() {
                         }}
                       >
                         GitHub repo
-                      </Button> 
-                      */}
+                      </Button>
                     </Flex>
                   </Box>
 

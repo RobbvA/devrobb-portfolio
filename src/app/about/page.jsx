@@ -108,12 +108,9 @@ export default function AboutPage() {
                 maxW="40rem"
                 lineHeight={1.8}
               >
-                I work with an architecture-first approach: defining the
-                structure, data flow and constraints before writing any code. AI
-                helps me iterate faster, generate implementation options, and
-                refine solutions — but the system design always comes first. I
-                like building clean, predictable web applications and improving
-                my workflow through consistent documentation and playbooks.
+                I work with an architecture-first approach, defining structure
+                and data flow before writing code. AI accelerates iteration and
+                refinement, while system design stays in full control.
               </Text>
             </VStack>
           </Flex>
@@ -211,9 +208,9 @@ export default function AboutPage() {
 
               <Text fontSize="sm" color="rgba(255,255,255,0.75)" mt={2}>
                 I prefer a small, predictable stack so I can focus on
-                architecture and problem-solving instead of fighting tooling.
-                React, Next.js, Node, Express and Prisma give me everything I
-                need to build clean, maintainable systems.
+                architecture and problem-solving instead of tooling. React,
+                Next.js, Node, and Prisma provide everything I need to build
+                clean, maintainable systems.
               </Text>
             </VStack>
           </GlassCard>
