@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from 'react';
 import styles from './contact-v2.module.css';
 
@@ -33,7 +33,7 @@ export default function ContactPage(){
         <div className={styles.links}>
           <a href="mailto:robbertasselt@gmail.com"><span>EMAIL</span><strong>robbertasselt@gmail.com ↗</strong></a>
           <a href="https://github.com/RobbvA" target="_blank" rel="noopener noreferrer"><span>GITHUB</span><strong>github.com/RobbvA ↗</strong></a>
-          <a href="https://www.linkedin.com/in/dev-robb" target="_blank" rel="noopener noreferrer"><span>LINKEDIN</span><strong>Connect on LinkedIn ↗</strong></a>
+          <a href="https://www.linkedin.com/in/robbert-van-asselt-a79426155/" target="_blank" rel="noopener noreferrer"><span>LINKEDIN</span><strong>Connect on LinkedIn ↗</strong></a>
           <a href="https://www.instagram.com/dev.robb/" target="_blank" rel="noopener noreferrer"><span>INSTAGRAM</span><strong>@dev.robb ↗</strong></a>
         </div>
       </div>
