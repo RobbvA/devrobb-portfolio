@@ -1,0 +1,66 @@
+/* Compact project selector — overrides older portfolio polish layers. */
+#main-content section[class*="projects_page"] [class*="headingRow"] { margin-bottom: 22px; }
+#main-content section[class*="projects_page"] [class*="deck"] {
+  gap: 12px;
+  margin-bottom: 20px;
+}
+#main-content section[class*="projects_page"] button[class*="card"] {
+  height: 172px;
+  min-height: 0;
+  aspect-ratio: auto;
+  padding: 14px 16px;
+  border-radius: 12px;
+  box-shadow: none;
+  background: #18181f;
+  transform: none;
+}
+#main-content section[class*="projects_page"] button[class*="card"]:hover {
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+#main-content section[class*="projects_page"] button[class*="selected"] {
+  background: #22222d;
+  border-color: var(--accent);
+}
+#main-content section[class*="projects_page"] [class*="cardTop"],
+#main-content section[class*="projects_page"] [class*="cardBottom"] {
+  font-size: 10px;
+  letter-spacing: .07em;
+}
+#main-content section[class*="projects_page"] [class*="cardTop"] span:last-child { font-size: 17px; }
+#main-content section[class*="projects_page"] [class*="cardCenter"] {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+#main-content section[class*="projects_page"] [class*="cardMonogram"] {
+  width: 40px;
+  max-width: none;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 9px;
+  font-size: 23px;
+}
+#main-content section[class*="projects_page"] [class*="cardTitle"] {
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.2;
+}
+#main-content section[class*="projects_page"] [class*="cardCategory"] {
+  flex-basis: 100%;
+  font-size: 9px;
+  letter-spacing: .07em;
+}
+@media (max-width: 620px) {
+  #main-content section[class*="projects_page"] [class*="deck"] { gap: 10px; margin-bottom: 16px; }
+  #main-content section[class*="projects_page"] button[class*="card"] {
+    height: 165px;
+    flex: 0 0 min(68vw, 230px);
+    padding: 12px;
+  }
+  #main-content section[class*="projects_page"] [class*="cardCenter"] { gap: 8px; }
+  #main-content section[class*="projects_page"] [class*="cardMonogram"] { width: 34px; height: 34px; flex-basis: 34px; font-size: 20px; }
+  #main-content section[class*="projects_page"] [class*="cardTitle"] { font-size: 17px; }
+}

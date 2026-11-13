@@ -2,6 +2,7 @@ import './globals.css';
 import './visual-polish.css';
 import './heading-fix.css';
 import './quality-pass.css';
+import './compact-project-cards.css';
 import Providers from './providers';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
