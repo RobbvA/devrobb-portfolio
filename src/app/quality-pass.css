@@ -1,0 +1,38 @@
+/* Final recruiter-readiness pass. Imported after existing typography overrides. */
+#main-content { min-width: 0; }
+#main-content > section { max-width: 100%; }
+#main-content section[class*="projects_page"] [class*="deck"] { gap: clamp(12px, 1.6vw, 20px); margin-bottom: 26px; }
+#main-content section[class*="projects_page"] button[class*="card"] { height: clamp(250px, 24vw, 290px); min-height: 0; padding: clamp(16px, 1.6vw, 22px); }
+#main-content section[class*="projects_page"] [class*="cardMonogram"] { width: 66px; font-size: 38px; }
+#main-content section[class*="projects_page"] [class*="cardTitle"] { font-size: clamp(19px, 1.75vw, 24px); }
+#main-content section[class*="projects_page"] [class*="cardCategory"] { font-size: 10px; }
+#main-content section[class*="projects_page"] [class*="detailsHeader"] { align-items: flex-start; }
+#main-content section[class*="projects_page"] [class*="detailGrid"] { min-width: 0; }
+#main-content section[class*="projects_page"] [class*="detailGrid"] > * { min-width: 0; }
+#main-content section[class*="projects_page"] [class*="flow"] { overflow-wrap: anywhere; }
+#main-content section[class*="projects_page"] [class*="imageBox"] { height: clamp(240px, 25vw, 330px); }
+#main-content section[class*="projects_page"] [class*="galleryControls"] span { min-width: 0; overflow-wrap: anywhere; }
+#main-content section[class*="contact-v2_page"] [class*="panel"] { min-width: 0; }
+#main-content section[class*="contact-v2_page"] input,
+#main-content section[class*="contact-v2_page"] textarea { min-width: 0; }
+.site-content footer [class*="chakra-stack"] { flex-wrap: wrap; justify-content: center; }
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #main-content section[class*="projects_page"] [class*="cardTitle"] { font-size: 20px; }
+  #main-content section[class*="projects_page"] [class*="detailGrid"] { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+}
+@media (max-width: 900px) {
+  #main-content section[class*="projects_page"] [class*="detailGrid"] { grid-template-columns: minmax(0,1fr); }
+  #main-content section[class*="projects_page"] [class*="imageBox"] { height: 300px; }
+}
+@media (max-width: 620px) {
+  #main-content section[class*="projects_page"] [class*="deck"] { gap: 14px; }
+  #main-content section[class*="projects_page"] button[class*="card"] { height: 310px; flex: 0 0 min(76vw, 275px); }
+  #main-content section[class*="projects_page"] [class*="imageBox"] { height: 220px; }
+  #main-content section[class*="projects_page"] [class*="galleryControls"] { gap: 8px; }
+  #main-content section[class*="projects_page"] [class*="galleryControls"] button { flex-shrink: 0; min-width: 44px; height: 44px; }
+  #main-content section[class*="projects_page"] [class*="actions"] a { min-width: 0; }
+  #main-content section[class*="contact-v2_page"] [class*="links"] a strong { overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main-content section[class*="projects_page"] button[class*="card"] { transition: none; }
+}
