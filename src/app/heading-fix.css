@@ -1,0 +1,36 @@
+/* Stable selectors: IDs do not change when Next.js hashes CSS module classes. */
+#home-title,
+#projects-title,
+#about-title,
+#contact-title {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+  text-wrap: balance;
+}
+
+@media (min-width: 1200px) {
+  #home-title { font-size: clamp(32px, 2.55vw, 40px) !important; white-space: nowrap; }
+  #home-title span { display: inline !important; }
+  #projects-title { font-size: clamp(32px, 2.6vw, 40px) !important; white-space: nowrap; }
+  #about-title { font-size: clamp(30px, 2.3vw, 36px) !important; max-width: none !important; white-space: nowrap; }
+  #contact-title { font-size: clamp(32px, 2.6vw, 40px) !important; }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  #home-title, #projects-title, #about-title, #contact-title { font-size: 32px !important; white-space: normal; }
+  #home-title span { display: inline !important; }
+}
+
+@media (max-width: 1023px) {
+  #home-title, #projects-title, #about-title, #contact-title {
+    font-size: clamp(29px, 5vw, 38px) !important;
+    white-space: normal;
+  }
+  #home-title span { display: inline !important; }
+}
+
+@media (max-width: 480px) {
+  #home-title, #projects-title, #about-title, #contact-title { font-size: clamp(28px, 8vw, 34px) !important; }
+}
