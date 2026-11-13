@@ -1,4 +1,5 @@
 import './globals.css';
+import './visual-polish.css';
 import Providers from './providers';
 import Nav from './components/Nav';
 import Footer from './components/Footer';

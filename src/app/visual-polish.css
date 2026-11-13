@@ -1,0 +1,40 @@
+/* Portfolio V2: consistent desktop-first type scale and vertical rhythm. */
+:root{--portfolio-heading:#fffccd;--portfolio-accent:#b5baff}
+.site-content footer{margin-top:0!important;padding-top:28px!important;padding-bottom:30px!important}
+.site-content footer [class*="chakra-container"]{gap:14px}
+.site-content footer [class*="chakra-stack"]{margin-top:8px!important;gap:48px!important}
+#main-content{min-height:0}
+#main-content>section{min-height:calc(100dvh - 210px)}
+/* Shared page padding: remove excessive top whitespace on desktop. */
+#main-content>section[class*="page"]{padding-top:clamp(34px,4vw,62px);padding-bottom:clamp(50px,5vw,76px)}
+/* Headlines: more restrained, still distinct. */
+#main-content section[class*="home-v2_page"] h1{font-size:clamp(42px,4.2vw,62px);line-height:1.12;letter-spacing:-.035em}
+#main-content section[class*="projects_page"] h1{font-size:clamp(38px,3.7vw,54px);line-height:1.14}
+#main-content section[class*="about-v2_page"] h1{font-size:clamp(36px,3.6vw,52px);line-height:1.16}
+#main-content section[class*="contact-v2_page"] h1{font-size:clamp(36px,3.6vw,52px);line-height:1.16}
+#main-content section[class*="home-v2_page"] [class*="intro"]{font-size:clamp(17px,1.45vw,21px);line-height:1.6}
+#main-content section[class*="about-v2_page"] [class*="lead"],#main-content section[class*="contact-v2_page"] [class*="lead"]{font-size:16px;line-height:1.65}
+/* Project cards: keep the playing-card idea, reduce wasted height. */
+#main-content section[class*="projects_page"] [class*="deck"]{gap:18px;margin-bottom:28px}
+#main-content section[class*="projects_page"] button[class*="card"]{aspect-ratio:auto;height:310px;min-height:0;padding:22px;border-radius:17px}
+#main-content section[class*="projects_page"] [class*="cardMonogram"]{width:76px;font-size:44px;border-radius:16px}
+#main-content section[class*="projects_page"] [class*="cardTitle"]{font-size:clamp(21px,2vw,26px)}
+#main-content section[class*="projects_page"] [class*="cardCenter"]{gap:10px}
+#main-content section[class*="projects_page"] [class*="details"]{padding:clamp(24px,3vw,36px);border-radius:18px}
+#main-content section[class*="projects_page"] [class*="details"] h2{font-size:clamp(30px,3vw,40px)}
+#main-content section[class*="projects_page"] [class*="description"]{margin:20px 0;font-size:15px;line-height:1.65}
+#main-content section[class*="projects_page"] [class*="detailGrid"]{gap:32px;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+#main-content section[class*="projects_page"] [class*="imageBox"]{height:310px}
+/* About: compact readable cards. */
+#main-content section[class*="about-v2_page"] [class*="hero"]{margin-bottom:32px;gap:30px}
+#main-content section[class*="about-v2_page"] [class*="grid"] article{padding:23px;border-radius:16px}
+#main-content section[class*="about-v2_page"] [class*="grid"] h2{font-size:21px;line-height:1.3}
+#main-content section[class*="about-v2_page"] [class*="grid"] p{line-height:1.7}
+/* Contact: shorter, more balanced forms and panels. */
+#main-content section[class*="contact-v2_page"] [class*="grid"]{margin-top:28px;gap:18px}
+#main-content section[class*="contact-v2_page"] [class*="panel"]{padding:clamp(22px,2.4vw,30px);border-radius:17px}
+#main-content section[class*="contact-v2_page"] [class*="panel"] h2{font-size:25px}
+#main-content section[class*="contact-v2_page"] [class*="links"] a{padding:14px 0}
+@media(max-width:1023px){#main-content section[class*="projects_page"] [class*="detailGrid"]{grid-template-columns:1fr}#main-content section[class*="projects_page"] [class*="imageBox"]{height:340px}}
+@media(max-width:800px){#main-content section[class*="projects_page"] button[class*="card"]{height:285px}#main-content section[class*="about-v2_page"] [class*="grid"]{grid-template-columns:1fr}#main-content section[class*="contact-v2_page"] [class*="grid"]{grid-template-columns:1fr}}
+@media(max-width:620px){#main-content>section[class*="page"]{padding-top:34px;padding-bottom:54px}#main-content section[class*="home-v2_page"] h1{font-size:clamp(37px,10vw,48px)}#main-content section[class*="projects_page"] h1{font-size:clamp(35px,9vw,46px)}#main-content section[class*="about-v2_page"] h1,#main-content section[class*="contact-v2_page"] h1{font-size:clamp(34px,8vw,44px)}#main-content section[class*="projects_page"] button[class*="card"]{height:330px;flex:0 0 min(76vw,275px)}#main-content section[class*="projects_page"] [class*="detailGrid"]{gap:20px}#main-content section[class*="projects_page"] [class*="imageBox"]{height:240px}#main-content section[class*="projects_page"] [class*="details"]{padding:20px 18px}.site-content footer [class*="chakra-stack"]{gap:30px!important}}
