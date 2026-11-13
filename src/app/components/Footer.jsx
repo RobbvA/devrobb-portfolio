@@ -1,17 +1,14 @@
-// src/app/components/Footer.jsx
 "use client";
 
 import NextLink from "next/link";
-import {
-  Box,
-  Container,
-  Flex,
-  HStack,
-  Text,
-  Link,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Container, HStack, Text, Link, Icon } from "@chakra-ui/react";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
+
+const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/dev.robb/", icon: FiInstagram },
+  { label: "GitHub", href: "https://github.com/RobbvA", icon: FiGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/robbert-van-asselt-a79426155/", icon: FiLinkedin },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -45,56 +42,27 @@ export default function Footer() {
         </Text>
 
         <HStack gap="80px" mt={6}>
-          <Link
-            as={NextLink}
-            href="https://instagram.com/dev.robb"
-            aria-label="Instagram"
-            title="Instagram"
-            display="inline-flex"
-            alignItems="center"
-            _hover={{ textDecoration: "none" }}
-          >
-            <Icon
-              as={FiInstagram}
-              boxSize="28px"
-              color="rgba(255,255,255,0.85)"
-              _hover={{ color: "#b5baff", transition: "0.2s ease" }}
-            />
-          </Link>
-
-          <Link
-            as={NextLink}
-            href="https://github.com/RobbvA" // 🔹 hier aangepast
-            aria-label="GitHub"
-            title="GitHub"
-            display="inline-flex"
-            alignItems="center"
-            _hover={{ textDecoration: "none" }}
-          >
-            <Icon
-              as={FiGithub}
-              boxSize="28px"
-              color="rgba(255,255,255,0.85)"
-              _hover={{ color: "#b5baff", transition: "0.2s ease" }}
-            />
-          </Link>
-
-          <Link
-            as={NextLink}
-            href="https://www.linkedin.com/in/dev-robb"
-            aria-label="LinkedIn"
-            title="LinkedIn"
-            display="inline-flex"
-            alignItems="center"
-            _hover={{ textDecoration: "none" }}
-          >
-            <Icon
-              as={FiLinkedin}
-              boxSize="28px"
-              color="rgba(255,255,255,0.85)"
-              _hover={{ color: "#b5baff", transition: "0.2s ease" }}
-            />
-          </Link>
+          {socialLinks.map(({ label, href, icon }) => (
+            <Link
+              key={label}
+              as={NextLink}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              title={label}
+              display="inline-flex"
+              alignItems="center"
+              _hover={{ textDecoration: "none" }}
+            >
+              <Icon
+                as={icon}
+                boxSize="28px"
+                color="rgba(255,255,255,0.85)"
+                _hover={{ color: "#b5baff", transition: "0.2s ease" }}
+              />
+            </Link>
+          ))}
         </HStack>
       </Container>
     </Box>
